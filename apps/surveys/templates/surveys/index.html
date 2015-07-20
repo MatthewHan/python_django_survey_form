@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title> Survey Form </title>
+        {% load staticfiles %}
+        <link rel="stylesheet" href="{% static 'surveys/css/materialize.css' %}">
+        <script type = 'text/javascript' src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type = 'text/javascript' src = "{% static 'surveys/js/materialize.js' %}"></script>
+        <script>
+            $(document).ready(function() {
+                $('select').material_select();
+            });
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="col s12 m12">
+                <div class="card hoverable">
+                    <div class="card-content black-text">
+                        <span class="card-title black-text">Survey Form</span>
+                        <form class = "col s10" action="{% url 'surveys:process_form' %}" method = "post">
+                            {% csrf_token %}
+                            <div class="input-field col s6">
+                                <input id="name" name = 'name' type="text">
+                                <label for="name">Name</label>
+                            </div>
+                            <select name = 'location' class="input-field col s6 validate">
+                                <option value="" disabled="disabled" selected="selected">Dojo Location</option>
+                                <option value="Seattle">Seattle</option>
+                                <option value="San Jose">San Jose</option>
+                                <option value="Mountain View">Mountain View</option>
+                            </select>
+                            <select name = 'language' class="input-field col s6 validate">
+                                <option value="" disabled="disabled" selected="selected">Favorite Language</option>
+                                <option value="PHP">PHP</option>
+                                <option value="Javascript">Javascript</option>
+                                <option value="Python">Python</option>
+                            </select>
+                            <div class="input-field col s6">
+                                <textarea name="comments" id="comments" class="materialize-textarea"></textarea>
+                                <label for="comments">Comments</label>
+                            </div>
+                    </div>
+                    <div class="card-action">
+                        <button class="waves-effect waves-light btn white-text">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
